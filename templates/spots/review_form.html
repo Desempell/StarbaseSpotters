@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Отзыв — Starbase Spotters{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <h1 class="h3 mb-1">{% if object %}Редактирование отзыва{% else %}Новый отзыв{% endif %}</h1>
+    <p class="text-body-secondary mb-3">о точке <a href="{{ spot.get_absolute_url }}">{{ spot.title }}</a></p>
+    <form method="post">
+      {% include "includes/form.html" %}
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a class="btn btn-outline-secondary" href="{{ spot.get_absolute_url }}">Отмена</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

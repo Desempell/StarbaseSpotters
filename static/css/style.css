@@ -1,0 +1,60 @@
+:root {
+  --ss-accent: #ff7a3d;
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(255, 122, 61, 0.08), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(80, 120, 255, 0.08), transparent 45%),
+    var(--bs-body-bg);
+}
+
+.hero {
+  background: linear-gradient(135deg, #0b1220 0%, #1a2847 60%, #3b1f2a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stars {
+  color: #ffc107;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.countdown {
+  color: var(--ss-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.map {
+  height: 380px;
+  z-index: 0;
+}
+
+.map-sm {
+  height: 280px;
+}
+
+.spot-card {
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.spot-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ss-accent);
+}
+
+.radio-group > div {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.radio-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status-planned { background-color: #0d6efd; }
+.status-completed { background-color: #198754; }
+.status-scrubbed { background-color: #6c757d; }

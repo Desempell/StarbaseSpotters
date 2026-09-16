@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static spotters %}
+{% block title %}Точки наблюдения — Starbase Spotters{% endblock %}
+{% block head %}<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <h1 class="h2 mb-0">Точки наблюдения</h1>
+  <a class="btn btn-primary" href="{% url 'spots:create' %}">+ Добавить точку</a>
+</div>
+
+<form method="get" class="row g-2 mb-3">
+  <div class="col-md-5">
+    <input type="search" name="q" value="{{ query }}" class="form-control" placeholder="Поиск по названию и описанию">
+  </div>
+  <div class="col-md-3">
+    <select name="site" class="form-select">
+      <option value="">Все космодромы</option>
+      {% for value, label in sites %}
+        <option value="{{ value }}"{% if value == current_site %} selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <select name="order" class="form-select">
+      <option value="">Сначала новые</option>
+      <option value="rating"{% if order == "rating" %} selected{% endif %}>По рейтингу</option>
+    </select>
+  </div>
+  <div class="col-md-2 d-grid"><button type="submit" class="btn btn-outline-light">Найти</button></div>
+</form>
+
+{% if map_points %}
+  <div id="spots-map" class="map rounded-3 mb-4"></div>
+  {{ map_points|json_script:"map-points" }}
+{% endif %}
+
+<div class="row g-3">
+  {% for spot in spots %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 spot-card">
+        <div class="card-body">
+          <div class="small text-body-secondary mb-1">{{ spot.get_site_display }}</div>
+          <h2 class="h5 card-title">
+            <a class="stretched-link text-decoration-none" href="{{ spot.get_absolute_url }}">{{ spot.title }}</a>
+          </h2>
+          <p class="card-text text-body-secondary">{{ spot.description|truncatewords:20 }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between small">
+          <span>
+            {% if spot.review_count %}
+              <span class="stars">{{ spot.avg_rating|stars }}</span> {{ spot.avg_rating|floatformat:1 }} ({{ spot.review_count }})
+            {% else %}
+              Нет отзывов
+            {% endif %}
+          </span>
+          <span>обзор {{ spot.visibility }}/5</span>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-body-secondary">Ничего не найдено.</p>
+  {% endfor %}
+</div>
+
+{% include "includes/pagination.html" %}
+{% endblock %}
+{% block scripts %}
+  {% if map_points %}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+  {% endif %}
+{% endblock %}

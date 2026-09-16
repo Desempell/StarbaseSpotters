@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ flight.name }} — Starbase Spotters{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'flights:list' %}">Полёты</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ flight.name }}</li>
+  </ol>
+</nav>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <span class="badge status-{{ flight.status }}">{{ flight.get_status_display }}</span>
+    <h1 class="h2 mt-2">{{ flight.name }}</h1>
+    <p class="text-body-secondary">{{ flight.get_site_display }} · плановый старт {{ flight.launch_date|date:"d.m.Y H:i" }} UTC</p>
+    {% if flight.predictions_open %}
+      <p class="fs-3 countdown" data-t0="{{ flight.launch_date|date:'c' }}"></p>
+    {% endif %}
+    {% if flight.description %}<p>{{ flight.description|linebreaksbr }}</p>{% endif %}
+  </div>
+
+  <div class="col-lg-5">
+    {% if flight.is_resolved %}
+      <div class="card mb-3 border-success">
+        <div class="card-header">Итоги полёта</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between"><span>Бустер пойман башней</span><strong>{{ flight.booster_caught|yesno:"да,нет" }}</strong></li>
+          <li class="list-group-item d-flex justify-content-between"><span>Корабль приводнился</span><strong>{{ flight.ship_splashdown|yesno:"да,нет" }}</strong></li>
+          <li class="list-group-item d-flex justify-content-between"><span>Фактический старт</span><strong>{{ flight.actual_launch_time|date:"d.m.Y H:i" }} UTC</strong></li>
+        </ul>
+      </div>
+    {% endif %}
+
+    <div class="card">
+      <div class="card-header">Ваш прогноз</div>
+      <div class="card-body">
+        {% if user_prediction %}
+          <p class="mb-1">Бустер поймают: <strong>{{ user_prediction.booster_caught|yesno:"да,нет" }}</strong></p>
+          <p class="mb-1">Корабль приводнится: <strong>{{ user_prediction.ship_splashdown|yesno:"да,нет" }}</strong></p>
+          <p class="mb-2">Старт: <strong>{{ user_prediction.predicted_launch_time|date:"d.m.Y H:i" }} UTC</strong></p>
+          {% if flight.is_resolved %}
+            <p class="fs-5 mb-0">Очки: <strong>{{ user_prediction.score }}/3</strong></p>
+          {% elif flight.predictions_open %}
+            <a class="btn btn-outline-light btn-sm" href="{% url 'flights:prediction_update' user_prediction.pk %}">Изменить</a>
+            <a class="btn btn-outline-danger btn-sm" href="{% url 'flights:prediction_delete' user_prediction.pk %}">Удалить</a>
+          {% endif %}
+        {% elif flight.predictions_open %}
+          {% if user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'flights:prediction_create' flight.pk %}">Сделать прогноз</a>
+          {% else %}
+            <a href="{% url 'login' %}?next={{ request.path|urlencode }}">Войдите</a>, чтобы сделать прогноз.
+          {% endif %}
+        {% else %}
+          <span class="text-body-secondary">Приём прогнозов закрыт.</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="h4 mt-5">Прогнозы сообщества ({{ crowd.total }})</h2>
+{% if crowd.total %}
+  <div class="row g-3 mb-3">
+    <div class="col-md-6">
+      <div class="small mb-1">Верят в поимку бустера: {{ crowd.booster_yes }}%</div>
+      <div class="progress" role="progressbar" aria-valuenow="{{ crowd.booster_yes }}" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-warning" style="width: {{ crowd.booster_yes }}%"></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="small mb-1">Верят в приводнение корабля: {{ crowd.ship_yes }}%</div>
+      <div class="progress" role="progressbar" aria-valuenow="{{ crowd.ship_yes }}" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-info" style="width: {{ crowd.ship_yes }}%"></div>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>Зритель</th><th>Бустер</th><th>Корабль</th><th>Старт, UTC</th>
+          {% if flight.is_resolved %}<th>Очки</th>{% endif %}
+          <th>Комментарий</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for prediction in predictions %}
+          <tr{% if prediction == user_prediction %} class="table-active"{% endif %}>
+            <td><a href="{% url 'profile' prediction.author.username %}">{{ prediction.author.username }}</a></td>
+            <td>{{ prediction.booster_caught|yesno:"да,нет" }}</td>
+            <td>{{ prediction.ship_splashdown|yesno:"да,нет" }}</td>
+            <td>{{ prediction.predicted_launch_time|date:"d.m H:i" }}</td>
+            {% if flight.is_resolved %}<td><strong>{{ prediction.score }}/3</strong></td>{% endif %}
+            <td class="text-body-secondary">{{ prediction.comment|truncatechars:80 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="text-body-secondary">Пока никто не сделал прогноз.</p>
+{% endif %}
+
+<p class="small text-body-secondary mt-3">
+  Очки: +1 за угаданную судьбу бустера, +1 за корабль, +1 если время старта угадано с точностью до {{ tolerance_minutes }} минут.
+</p>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/countdown.js' %}"></script>{% endblock %}

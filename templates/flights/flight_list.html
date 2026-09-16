@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Полёты — Starbase Spotters{% endblock %}
+{% block content %}
+<h1 class="h2 mb-3">Полёты Starship</h1>
+
+<h2 class="h5 text-body-secondary">Предстоящие</h2>
+<div class="row g-3 mb-5">
+  {% for flight in upcoming %}
+    <div class="col-md-6">
+      <div class="card h-100 spot-card">
+        <div class="card-body">
+          <span class="badge status-{{ flight.status }}">{{ flight.get_status_display }}</span>
+          <h3 class="h4 mt-2"><a class="stretched-link text-decoration-none" href="{{ flight.get_absolute_url }}">{{ flight.name }}</a></h3>
+          <p class="text-body-secondary mb-1">{{ flight.get_site_display }} · {{ flight.launch_date|date:"d.m.Y H:i" }} UTC</p>
+          <p class="fs-4 countdown mb-1" data-t0="{{ flight.launch_date|date:'c' }}"></p>
+          <small class="text-body-secondary">Прогнозов: {{ flight.prediction_count }}</small>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-body-secondary">Запланированных полётов нет.</p>
+  {% endfor %}
+</div>
+
+<h2 class="h5 text-body-secondary">Прошедшие</h2>
+{% if past %}
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead><tr><th>Полёт</th><th>Дата</th><th>Статус</th><th>Бустер пойман</th><th>Корабль приводнился</th><th>Прогнозов</th></tr></thead>
+      <tbody>
+        {% for flight in past %}
+          <tr>
+            <td><a href="{{ flight.get_absolute_url }}">{{ flight.name }}</a></td>
+            <td>{{ flight.launch_date|date:"d.m.Y" }}</td>
+            <td><span class="badge status-{{ flight.status }}">{{ flight.get_status_display }}</span></td>
+            <td>{{ flight.booster_caught|yesno:"да,нет,—" }}</td>
+            <td>{{ flight.ship_splashdown|yesno:"да,нет,—" }}</td>
+            <td>{{ flight.prediction_count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p class="text-body-secondary">Пока пусто.</p>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/countdown.js' %}"></script>{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static spotters %}
+{% block title %}{{ spot.title }} — Starbase Spotters{% endblock %}
+{% block head %}<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">{% endblock %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'spots:list' %}">Точки наблюдения</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ spot.title }}</li>
+  </ol>
+</nav>
+
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+  <div>
+    <h1 class="h2 mb-1">{{ spot.title }}</h1>
+    <div class="text-body-secondary">
+      {{ spot.get_site_display }} · добавил(а)
+      <a href="{% url 'profile' spot.author.username %}">{{ spot.author.username }}</a>
+      · {{ spot.created_at|date:"d.m.Y" }}
+    </div>
+  </div>
+  {% if user == spot.author %}
+    <div class="d-flex gap-2">
+      <a class="btn btn-outline-light btn-sm" href="{% url 'spots:update' spot.pk %}">Изменить</a>
+      <a class="btn btn-outline-danger btn-sm" href="{% url 'spots:delete' spot.pk %}">Удалить</a>
+    </div>
+  {% endif %}
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    {% if spot.description %}<p class="fs-5">{{ spot.description|linebreaksbr }}</p>{% endif %}
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between"><span>Обзор</span><span class="stars">{{ spot.visibility|stars }}</span></li>
+      <li class="list-group-item d-flex justify-content-between"><span>Людей</span><span>{{ spot.get_crowd_display }}</span></li>
+      <li class="list-group-item d-flex justify-content-between"><span>Парковка</span><span>{{ spot.has_parking|yesno:"есть,нет" }}</span></li>
+      <li class="list-group-item d-flex justify-content-between"><span>Мобильная связь</span><span>{{ spot.has_cell_signal|yesno:"есть,нет" }}</span></li>
+      {% if spot.distance_km is not None %}
+        <li class="list-group-item d-flex justify-content-between"><span>До стартового стола</span><span>{{ spot.distance_km }} км</span></li>
+      {% endif %}
+      {% if spot.has_coordinates %}
+        <li class="list-group-item d-flex justify-content-between"><span>Координаты</span><span>{{ spot.latitude }}, {{ spot.longitude }}</span></li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="col-lg-5">
+    {% if map_points %}
+      <div id="spots-map" class="map map-sm rounded-3"></div>
+      {{ map_points|json_script:"map-points" }}
+    {% endif %}
+  </div>
+</div>
+
+<h2 class="h4 mt-5">
+  Отзывы
+  {% if spot.review_count %}
+    <span class="stars">{{ spot.avg_rating|stars }}</span>
+    <small class="text-body-secondary fs-6">{{ spot.avg_rating|floatformat:1 }} · {{ spot.review_count }}</small>
+  {% endif %}
+</h2>
+
+{% if not user.is_authenticated %}
+  <p class="text-body-secondary"><a href="{% url 'login' %}?next={{ request.path|urlencode }}">Войдите</a>, чтобы оставить отзыв.</p>
+{% elif user == spot.author %}
+  <p class="text-body-secondary">Это ваша точка — отзывы оставляют другие зрители.</p>
+{% elif not user_review %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <form method="post" action="{% url 'spots:review_create' spot.pk %}">
+        {% include "includes/form.html" with form=review_form %}
+        <button type="submit" class="btn btn-primary">Оставить отзыв</button>
+      </form>
+    </div>
+  </div>
+{% endif %}
+
+{% for review in reviews %}
+  <div class="card mb-2{% if review == user_review %} border-primary{% endif %}">
+    <div class="card-body">
+      <div class="d-flex flex-wrap justify-content-between gap-2">
+        <div>
+          <a class="fw-semibold" href="{% url 'profile' review.author.username %}">{{ review.author.username }}</a>
+          <span class="stars ms-2">{{ review.rating|stars }}</span>
+        </div>
+        <small class="text-body-secondary">
+          {{ review.created_at|date:"d.m.Y H:i" }}{% if review.was_edited %} · изменён{% endif %}
+        </small>
+      </div>
+      <p class="mb-0 mt-2">{{ review.text|linebreaksbr }}</p>
+      {% if user == review.author %}
+        <div class="mt-2 small">
+          <a href="{% url 'spots:review_update' review.pk %}">Изменить</a> ·
+          <a class="link-danger" href="{% url 'spots:review_delete' review.pk %}">Удалить</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% empty %}
+  <p class="text-body-secondary">Отзывов пока нет.</p>
+{% endfor %}
+{% endblock %}
+{% block scripts %}
+  {% if map_points %}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{% static 'js/map.js' %}"></script>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load spotters %}
+{% block title %}{{ profile_user.username }} — Starbase Spotters{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
+  <div>
+    <h1 class="h2 mb-1">👤 {{ profile_user.username }}</h1>
+    <div class="text-body-secondary">С нами с {{ profile_user.date_joined|date:"d.m.Y" }}</div>
+  </div>
+  <div class="d-flex gap-4 text-center">
+    <div><div class="fs-3 fw-bold">{{ stats.points }}</div><small class="text-body-secondary">очков</small></div>
+    <div><div class="fs-3 fw-bold">{{ stats.predictions }}</div><small class="text-body-secondary">засчитано прогнозов</small></div>
+    <div><div class="fs-3 fw-bold">{{ stats.accuracy }}%</div><small class="text-body-secondary">точность</small></div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <h2 class="h5">Точки ({{ spots|length }})</h2>
+    <ul class="list-group">
+      {% for spot in spots %}
+        <li class="list-group-item"><a href="{{ spot.get_absolute_url }}">{{ spot.title }}</a></li>
+      {% empty %}
+        <li class="list-group-item text-body-secondary">Пока нет.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-lg-4">
+    <h2 class="h5">Отзывы ({{ reviews|length }})</h2>
+    <ul class="list-group">
+      {% for review in reviews %}
+        <li class="list-group-item d-flex justify-content-between">
+          <a href="{{ review.get_absolute_url }}">{{ review.spot.title }}</a>
+          <span class="stars">{{ review.rating|stars }}</span>
+        </li>
+      {% empty %}
+        <li class="list-group-item text-body-secondary">Пока нет.</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-lg-4">
+    <h2 class="h5">Прогнозы ({{ predictions|length }})</h2>
+    <ul class="list-group">
+      {% for prediction in predictions %}
+        <li class="list-group-item d-flex justify-content-between">
+          <a href="{{ prediction.get_absolute_url }}">{{ prediction.flight.name }}</a>
+          {% with score=prediction.score %}
+            {% if score is not None %}<span class="badge text-bg-secondary">{{ score }}/3</span>{% else %}<small class="text-body-secondary">ждём полёта</small>{% endif %}
+          {% endwith %}
+        </li>
+      {% empty %}
+        <li class="list-group-item text-body-secondary">Пока нет.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

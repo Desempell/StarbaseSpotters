@@ -1,0 +1,24 @@
+{% if rows %}
+<div class="table-responsive">
+  <table class="table align-middle mb-0">
+    <thead><tr><th>#</th><th>Зритель</th><th>Очки</th><th>Прогнозов</th><th class="w-25">Точность</th></tr></thead>
+    <tbody>
+      {% for row in rows %}
+        <tr>
+          <td>{% if forloop.counter == 1 %}🥇{% elif forloop.counter == 2 %}🥈{% elif forloop.counter == 3 %}🥉{% else %}{{ forloop.counter }}{% endif %}</td>
+          <td><a href="{% url 'profile' row.user.username %}">{{ row.user.username }}</a></td>
+          <td><strong>{{ row.points }}</strong></td>
+          <td>{{ row.predictions }}</td>
+          <td>
+            <div class="progress" role="progressbar" aria-valuenow="{{ row.accuracy }}" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" style="width: {{ row.accuracy }}%">{{ row.accuracy }}%</div>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="card-body text-body-secondary">Пока нет засчитанных прогнозов.</div>
+{% endif %}

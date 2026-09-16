@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Лидеры — Starbase Spotters{% endblock %}
+{% block content %}
+<h1 class="h2 mb-1">Лучшие предсказатели Starbase</h1>
+<p class="text-body-secondary">
+  Учитываются только полёты, итоги которых уже известны. Максимум 3 очка за полёт.
+</p>
+<div class="card">
+  {% include "flights/includes/leaderboard_table.html" %}
+</div>
+{% endblock %}
