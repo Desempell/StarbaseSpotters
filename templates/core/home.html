@@ -1,40 +1,40 @@
 {% extends "base.html" %}
-{% load static spotters %}
+{% load static i18n spotters %}
 {% block content %}
 <section class="hero rounded-4 p-4 p-md-5 mb-4">
-  <h1 class="display-5 fw-bold">Где смотреть следующий запуск Starship?</h1>
+  <h1 class="display-5 fw-bold">{% translate "Where to watch the next Starship launch?" %}</h1>
   <p class="lead col-lg-8">
-    Сообщество зрителей: делитесь точками наблюдения, пишите отзывы и соревнуйтесь в прогнозах на тестовые полёты.
+    {% translate "A community of launch watchers: share viewing spots, write reviews and compete in test flight predictions." %}
   </p>
   <div class="d-flex flex-wrap gap-2">
-    <a class="btn btn-primary btn-lg" href="{% url 'spots:list' %}">Смотреть точки</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'spots:list' %}">{% translate "Browse spots" %}</a>
     {% if user.is_authenticated %}
-      <a class="btn btn-outline-light btn-lg" href="{% url 'flights:list' %}">Сделать прогноз</a>
+      <a class="btn btn-outline-light btn-lg" href="{% url 'flights:list' %}">{% translate "Make a prediction" %}</a>
     {% else %}
-      <a class="btn btn-outline-light btn-lg" href="{% url 'signup' %}">Присоединиться</a>
+      <a class="btn btn-outline-light btn-lg" href="{% url 'signup' %}">{% translate "Join" %}</a>
     {% endif %}
   </div>
   <div class="d-flex flex-wrap gap-4 mt-4 small text-body-secondary">
-    <span><strong class="text-body">{{ totals.spots }}</strong> точек</span>
-    <span><strong class="text-body">{{ totals.reviews }}</strong> отзывов</span>
-    <span><strong class="text-body">{{ totals.predictions }}</strong> прогнозов</span>
+    <span>{% blocktranslate count counter=totals.spots %}<strong class="text-body">{{ counter }}</strong> spot{% plural %}<strong class="text-body">{{ counter }}</strong> spots{% endblocktranslate %}</span>
+    <span>{% blocktranslate count counter=totals.reviews %}<strong class="text-body">{{ counter }}</strong> review{% plural %}<strong class="text-body">{{ counter }}</strong> reviews{% endblocktranslate %}</span>
+    <span>{% blocktranslate count counter=totals.predictions %}<strong class="text-body">{{ counter }}</strong> prediction{% plural %}<strong class="text-body">{{ counter }}</strong> predictions{% endblocktranslate %}</span>
   </div>
 </section>
 
 <div class="row g-4">
   <div class="col-lg-6">
     <div class="card h-100">
-      <div class="card-header">Ближайший полёт</div>
+      <div class="card-header">{% translate "Next flight" %}</div>
       <div class="card-body">
         {% if next_flight %}
           <h2 class="h4">{{ next_flight.name }}</h2>
           <p class="text-body-secondary mb-2">
-            {{ next_flight.get_site_display }} · {{ next_flight.launch_date|date:"d.m.Y H:i" }} UTC
+            {{ next_flight.get_site_display }} · {{ next_flight.launch_date|date:"SHORT_DATETIME_FORMAT" }} UTC
           </p>
           <p class="fs-3 countdown" data-t0="{{ next_flight.launch_date|date:'c' }}"></p>
-          <a class="btn btn-primary" href="{{ next_flight.get_absolute_url }}">Прогнозы на полёт</a>
+          <a class="btn btn-primary" href="{{ next_flight.get_absolute_url }}">{% translate "Flight predictions" %}</a>
         {% else %}
-          <p class="text-body-secondary mb-0">Ближайших полётов пока нет.</p>
+          <p class="text-body-secondary mb-0">{% translate "No upcoming flights yet." %}</p>
         {% endif %}
       </div>
     </div>
@@ -42,7 +42,7 @@
 
   <div class="col-lg-6">
     <div class="card h-100">
-      <div class="card-header">Лучшие точки наблюдения</div>
+      <div class="card-header">{% translate "Top viewing spots" %}</div>
       <ul class="list-group list-group-flush">
         {% for spot in top_spots %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -50,7 +50,7 @@
             <span><span class="stars">{{ spot.avg_rating|stars }}</span> <small class="text-body-secondary">({{ spot.review_count }})</small></span>
           </li>
         {% empty %}
-          <li class="list-group-item text-body-secondary">Отзывов пока нет.</li>
+          <li class="list-group-item text-body-secondary">{% translate "No reviews yet." %}</li>
         {% endfor %}
       </ul>
     </div>
@@ -59,8 +59,8 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
-        <span>Лучшие предсказатели Starbase</span>
-        <a href="{% url 'flights:leaderboard' %}">Вся таблица →</a>
+        <span>{% translate "Top Starbase predictors" %}</span>
+        <a href="{% url 'flights:leaderboard' %}">{% translate "Full table →" %}</a>
       </div>
       {% include "flights/includes/leaderboard_table.html" with rows=leaders %}
     </div>

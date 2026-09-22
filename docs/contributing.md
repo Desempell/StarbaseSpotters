@@ -43,7 +43,29 @@ pytest
 - [ ] `pytest` проходит
 - [ ] `python manage.py makemigrations --check` не находит новых миграций
 - [ ] добавлены тесты на новую логику
+- [ ] новые строки интерфейса обёрнуты в `gettext` / `{% translate %}`, переводы обновлены
 - [ ] обновлён раздел `[Unreleased]` в `CHANGELOG.md`
+
+## Переводы
+
+Интерфейс локализован стандартными средствами Django (gettext). Исходные строки
+пишутся на английском, русский перевод лежит в `locale/ru/LC_MESSAGES/`.
+Для работы команд нужны утилиты GNU gettext.
+
+Собрать новые строки:
+
+```bash
+python manage.py makemessages -l ru -l en --no-location
+python manage.py makemessages -d djangojs -l ru -l en --no-location
+```
+
+Заполнить `msgstr` в `locale/ru/LC_MESSAGES/*.po` и скомпилировать:
+
+```bash
+python manage.py compilemessages
+```
+
+Скомпилированные `.mo` хранятся в репозитории, поэтому для запуска проекта gettext не нужен.
 
 ## Версии и релизы
 

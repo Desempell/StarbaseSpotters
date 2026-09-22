@@ -1,5 +1,5 @@
-{% load static %}<!doctype html>
-<html lang="ru" data-bs-theme="dark">
+{% load static i18n %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,14 +13,14 @@
   <div class="container">
     <a class="navbar-brand fw-bold" href="{% url 'home' %}">🚀 Starbase Spotters</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
-            aria-controls="main-nav" aria-expanded="false" aria-label="Меню">
+            aria-controls="main-nav" aria-expanded="false" aria-label="{% translate 'Menu' %}">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="main-nav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" href="{% url 'spots:list' %}">Точки наблюдения</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'flights:list' %}">Полёты</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'flights:leaderboard' %}">Лидеры</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'spots:list' %}">{% translate "Viewing spots" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'flights:list' %}">{% translate "Flights" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'flights:leaderboard' %}">{% translate "Leaders" %}</a></li>
       </ul>
       <ul class="navbar-nav align-items-md-center">
         {% if user.is_authenticated %}
@@ -28,13 +28,25 @@
           <li class="nav-item">
             <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
-              <button type="submit" class="btn btn-link nav-link">Выйти</button>
+              <button type="submit" class="btn btn-link nav-link">{% translate "Log out" %}</button>
             </form>
           </li>
         {% else %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Войти</a></li>
-          <li class="nav-item"><a class="btn btn-primary btn-sm ms-md-2" href="{% url 'signup' %}">Регистрация</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">{% translate "Log in" context "button" %}</a></li>
+          <li class="nav-item"><a class="btn btn-primary btn-sm ms-md-2" href="{% url 'signup' %}">{% translate "Sign up" context "page title" %}</a></li>
         {% endif %}
+        <li class="nav-item ms-md-2">
+          <form method="post" action="{% url 'set_language' %}" class="btn-group btn-group-sm" role="group" aria-label="{% translate 'Language' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            {% get_available_languages as languages %}
+            {% for code, name in languages %}
+              {% get_language_info for code as language %}
+              <button type="submit" name="language" value="{{ code }}" title="{{ language.name_local|capfirst }}"
+                      class="btn {% if code == LANGUAGE_CODE %}btn-light{% else %}btn-outline-light{% endif %}">{{ code|upper }}</button>
+            {% endfor %}
+          </form>
+        </li>
       </ul>
     </div>
   </div>
@@ -44,7 +56,7 @@
   {% for message in messages %}
     <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
       {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% translate 'Close' %}"></button>
     </div>
   {% endfor %}
   {% block content %}{% endblock %}
@@ -53,10 +65,11 @@
 <footer class="border-top py-3 small text-body-secondary">
   <div class="container d-flex flex-wrap justify-content-between gap-2">
     <span>Starbase Spotters v{{ APP_VERSION }}</span>
-    <span>Фан-проект, не связан со SpaceX</span>
+    <span>{% translate "Fan project, not affiliated with SpaceX" %}</span>
   </div>
 </footer>
 
+<script src="{% url 'javascript-catalog' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 {% block scripts %}{% endblock %}
 </body>

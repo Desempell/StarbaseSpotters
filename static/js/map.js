@@ -11,9 +11,10 @@
     maxZoom: 19,
     subdomains: "abcd",
     detectRetina: true,
-    attribution:
-      '&copy; участники <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
-      'тайлы &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    attribution: interpolate(gettext("&copy; %(osm)s contributors, tiles &copy; %(carto)s"), {
+      osm: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      carto: '<a href="https://carto.com/attributions">CARTO</a>',
+    }, true),
   }).addTo(map);
 
   const markers = points.map((point) => {

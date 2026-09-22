@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Лидеры — Starbase Spotters{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "Leaders" %} — Starbase Spotters{% endblock %}
 {% block content %}
-<h1 class="h2 mb-1">Лучшие предсказатели Starbase</h1>
+<h1 class="h2 mb-1">{% translate "Top Starbase predictors" %}</h1>
 <p class="text-body-secondary">
-  Учитываются только полёты, итоги которых уже известны. Максимум 3 очка за полёт.
+  {% translate "Only flights with known results are counted. Up to 3 points per flight." %}
 </p>
 <div class="card">
   {% include "flights/includes/leaderboard_table.html" %}

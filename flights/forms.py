@@ -1,10 +1,11 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from core.forms import BootstrapFormMixin
 
 from .models import Prediction
 
-YES_NO = [("True", "Да"), ("False", "Нет")]
+YES_NO = [("True", _("Yes")), ("False", _("No"))]
 
 
 def yes_no_field(label):
@@ -17,8 +18,8 @@ def yes_no_field(label):
 
 
 class PredictionForm(BootstrapFormMixin, forms.ModelForm):
-    booster_caught = yes_no_field("Бустер поймают башней?")
-    ship_splashdown = yes_no_field("Корабль успешно приводнится?")
+    booster_caught = yes_no_field(_("Will the tower catch the booster?"))
+    ship_splashdown = yes_no_field(_("Will the ship splash down successfully?"))
 
     class Meta:
         model = Prediction
@@ -30,5 +31,5 @@ class PredictionForm(BootstrapFormMixin, forms.ModelForm):
             "comment": forms.Textarea(attrs={"rows": 3}),
         }
         help_texts = {
-            "predicted_launch_time": "Засчитывается, если ошибка не больше 30 минут.",
+            "predicted_launch_time": _("Counts if you are off by no more than 30 minutes."),
         }

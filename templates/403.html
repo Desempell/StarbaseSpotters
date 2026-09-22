@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Нет доступа — Starbase Spotters{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "Access denied" %} — Starbase Spotters{% endblock %}
 {% block content %}
 <div class="text-center py-5">
   <div class="display-1">🛑</div>
-  <h1 class="h3">Нет доступа</h1>
-  <p class="text-body-secondary">Изменять и удалять запись может только её автор.</p>
-  <a class="btn btn-primary" href="{% url 'home' %}">На главную</a>
+  <h1 class="h3">{% translate "Access denied" %}</h1>
+  <p class="text-body-secondary">{% translate "Only the author can edit or delete this entry." %}</p>
+  <a class="btn btn-primary" href="{% url 'home' %}">{% translate "Back to home" %}</a>
 </div>
 {% endblock %}

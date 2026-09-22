@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from core.choices import LaunchSite
 
@@ -15,26 +16,26 @@ MAX_SCORE = 3
 class Flight(models.Model):
 
     class Status(models.TextChoices):
-        PLANNED = "planned", "Запланирован"
-        COMPLETED = "completed", "Состоялся"
-        SCRUBBED = "scrubbed", "Отменён"
+        PLANNED = "planned", _("Planned")
+        COMPLETED = "completed", _("Completed")
+        SCRUBBED = "scrubbed", _("Scrubbed")
 
-    name = models.CharField("название", max_length=80, unique=True)
+    name = models.CharField(_("name"), max_length=80, unique=True)
     site = models.CharField(
-        "космодром", max_length=20, choices=LaunchSite.choices, default=LaunchSite.STARBASE
+        _("launch site"), max_length=20, choices=LaunchSite.choices, default=LaunchSite.STARBASE
     )
-    launch_date = models.DateTimeField("плановое время старта (UTC)")
-    description = models.TextField("описание", blank=True)
-    status = models.CharField("статус", max_length=10, choices=Status.choices, default=Status.PLANNED)
+    launch_date = models.DateTimeField(_("planned launch time (UTC)"))
+    description = models.TextField(_("description"), blank=True)
+    status = models.CharField(_("status"), max_length=10, choices=Status.choices, default=Status.PLANNED)
 
-    booster_caught = models.BooleanField("бустер пойман башней", null=True, blank=True)
-    ship_splashdown = models.BooleanField("корабль приводнился", null=True, blank=True)
-    actual_launch_time = models.DateTimeField("фактическое время старта (UTC)", null=True, blank=True)
+    booster_caught = models.BooleanField(_("booster caught by tower"), null=True, blank=True)
+    ship_splashdown = models.BooleanField(_("ship splashed down"), null=True, blank=True)
+    actual_launch_time = models.DateTimeField(_("actual launch time (UTC)"), null=True, blank=True)
 
     class Meta:
         ordering = ["-launch_date"]
-        verbose_name = "полёт"
-        verbose_name_plural = "полёты"
+        verbose_name = _("flight")
+        verbose_name_plural = _("flights")
 
     def __str__(self):
         return self.name
@@ -45,7 +46,7 @@ class Flight(models.Model):
     def clean(self):
         if self.status == self.Status.COMPLETED and not self.has_outcome:
             raise ValidationError(
-                "Для состоявшегося полёта заполните все результаты: бустер, корабль и фактическое время старта."
+                _("For a completed flight, fill in all results: booster, ship and actual launch time.")
             )
 
     @property
@@ -78,27 +79,27 @@ class PredictionQuerySet(models.QuerySet):
 class Prediction(models.Model):
 
     flight = models.ForeignKey(
-        Flight, on_delete=models.CASCADE, related_name="predictions", verbose_name="полёт"
+        Flight, on_delete=models.CASCADE, related_name="predictions", verbose_name=_("flight")
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="predictions",
-        verbose_name="автор",
+        verbose_name=_("author"),
     )
-    booster_caught = models.BooleanField("бустер поймают башней?")
-    ship_splashdown = models.BooleanField("корабль успешно приводнится?")
-    predicted_launch_time = models.DateTimeField("во сколько реально стартуют (UTC)?")
-    comment = models.TextField("комментарий", max_length=500, blank=True)
-    created_at = models.DateTimeField("создано", auto_now_add=True)
-    updated_at = models.DateTimeField("изменено", auto_now=True)
+    booster_caught = models.BooleanField(_("will the tower catch the booster?"))
+    ship_splashdown = models.BooleanField(_("will the ship splash down successfully?"))
+    predicted_launch_time = models.DateTimeField(_("when will it actually launch (UTC)?"))
+    comment = models.TextField(_("comment"), max_length=500, blank=True)
+    created_at = models.DateTimeField(_("created"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated"), auto_now=True)
 
     objects = PredictionQuerySet.as_manager()
 
     class Meta:
         ordering = ["-created_at"]
-        verbose_name = "прогноз"
-        verbose_name_plural = "прогнозы"
+        verbose_name = _("prediction")
+        verbose_name_plural = _("predictions")
         constraints = [
             models.UniqueConstraint(fields=["flight", "author"], name="one_prediction_per_user_per_flight"),
         ]

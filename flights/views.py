@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
 from core.mixins import AuthorRequiredMixin
@@ -62,7 +63,7 @@ class PredictionsOpenMixin:
     def dispatch(self, request, *args, **kwargs):
         flight = self.get_flight()
         if not flight.predictions_open:
-            messages.warning(request, "Приём прогнозов на этот полёт закрыт.")
+            messages.warning(request, _("Predictions for this flight are closed."))
             return redirect(flight)
         return super().dispatch(request, *args, **kwargs)
 
@@ -85,7 +86,7 @@ class PredictionCreateView(PredictionsOpenMixin, LoginRequiredMixin, CreateView)
     def post(self, request, *args, **kwargs):
         existing = self.flight.predictions.filter(author=request.user).first()
         if existing:
-            messages.info(request, "Вы уже сделали прогноз — его можно изменить.")
+            messages.info(request, _("You’ve already made a prediction — you can change it."))
             return redirect("flights:prediction_update", pk=existing.pk)
         return super().post(request, *args, **kwargs)
 
@@ -100,7 +101,7 @@ class PredictionCreateView(PredictionsOpenMixin, LoginRequiredMixin, CreateView)
     def form_valid(self, form):
         form.instance.flight = self.flight
         form.instance.author = self.request.user
-        messages.success(self.request, "Прогноз принят. Удачи!")
+        messages.success(self.request, _("Prediction accepted. Good luck!"))
         return super().form_valid(form)
 
 
@@ -118,7 +119,7 @@ class PredictionUpdateView(PredictionsOpenMixin, AuthorRequiredMixin, UpdateView
         return context
 
     def form_valid(self, form):
-        messages.success(self.request, "Прогноз обновлён.")
+        messages.success(self.request, _("Prediction updated."))
         return super().form_valid(form)
 
 
@@ -133,7 +134,7 @@ class PredictionDeleteView(PredictionsOpenMixin, AuthorRequiredMixin, DeleteView
         return self.object.flight.get_absolute_url()
 
     def form_valid(self, form):
-        messages.success(self.request, "Прогноз удалён.")
+        messages.success(self.request, _("Prediction deleted."))
         return super().form_valid(form)
 
 

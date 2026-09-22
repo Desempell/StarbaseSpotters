@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DetailView
 
 from flights.scoring import user_stats
@@ -23,7 +24,9 @@ class SignUpView(CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
         login(self.request, self.object)
-        messages.success(self.request, f"Добро пожаловать на борт, {self.object.username}!")
+        messages.success(
+            self.request, _("Welcome aboard, %(username)s!") % {"username": self.object.username}
+        )
         return response
 
 

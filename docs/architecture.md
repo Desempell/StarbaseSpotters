@@ -102,3 +102,5 @@ erDiagram
 | `/flights/`, `/flights/<id>/`, `/flights/leaderboard/` | полёты и лидеры |
 | `/flights/<id>/predict/`, `/flights/predictions/<id>/edit/`, `/flights/predictions/<id>/delete/` | прогнозы |
 | `/admin/` | админ-панель |
+| `/i18n/setlang/` | смена языка интерфейса |
+| `/jsi18n/` | каталог переводов для JavaScript |

@@ -1,0 +1,678 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Starbase Spotters\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 22:19+0300\n"
+"PO-Revision-Date: 2026-09-22 22:17+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Users"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Optional."
+msgstr ""
+
+#, python-format
+msgid "Welcome aboard, %(username)s!"
+msgstr ""
+
+msgid "Russian"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Starbase, Texas"
+msgstr ""
+
+msgid "Kennedy Space Center, Florida"
+msgstr ""
+
+#, python-format
+msgid "Demo data is ready. Users: %(users)s; password: %(password)s"
+msgstr ""
+
+msgid "Flight results"
+msgstr ""
+
+msgid ""
+"Fill in after the flight and set the status to “Completed” — points will be "
+"awarded automatically."
+msgstr ""
+
+msgid "Flights and predictions"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Will the tower catch the booster?"
+msgstr ""
+
+msgid "Will the ship splash down successfully?"
+msgstr ""
+
+msgid "Counts if you are off by no more than 30 minutes."
+msgstr ""
+
+msgid "Planned"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Scrubbed"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "launch site"
+msgstr ""
+
+msgid "planned launch time (UTC)"
+msgstr ""
+
+msgid "description"
+msgstr ""
+
+msgid "status"
+msgstr ""
+
+msgid "booster caught by tower"
+msgstr ""
+
+msgid "ship splashed down"
+msgstr ""
+
+msgid "actual launch time (UTC)"
+msgstr ""
+
+msgid "flight"
+msgstr ""
+
+msgid "flights"
+msgstr ""
+
+msgid ""
+"For a completed flight, fill in all results: booster, ship and actual launch "
+"time."
+msgstr ""
+
+msgid "author"
+msgstr ""
+
+msgid "will the tower catch the booster?"
+msgstr ""
+
+msgid "will the ship splash down successfully?"
+msgstr ""
+
+msgid "when will it actually launch (UTC)?"
+msgstr ""
+
+msgid "comment"
+msgstr ""
+
+msgid "created"
+msgstr ""
+
+msgid "updated"
+msgstr ""
+
+msgid "prediction"
+msgstr ""
+
+msgid "predictions"
+msgstr ""
+
+msgid "Predictions for this flight are closed."
+msgstr ""
+
+msgid "You’ve already made a prediction — you can change it."
+msgstr ""
+
+msgid "Prediction accepted. Good luck!"
+msgstr ""
+
+msgid "Prediction updated."
+msgstr ""
+
+msgid "Prediction deleted."
+msgstr ""
+
+msgid "Viewing spots"
+msgstr ""
+
+msgid "Optional. If you add coordinates, the spot will appear on the map."
+msgstr ""
+
+msgid "How well can you see the launch? Where to park? When to arrive?"
+msgstr ""
+
+msgid "Almost empty"
+msgstr ""
+
+msgid "Moderate"
+msgstr ""
+
+msgid "Crowded"
+msgstr ""
+
+msgid "title"
+msgstr ""
+
+msgid "latitude"
+msgstr ""
+
+msgid "longitude"
+msgstr ""
+
+msgid "distance to launch pad, km"
+msgstr ""
+
+msgid "visibility (1–5)"
+msgstr ""
+
+msgid "crowd"
+msgstr ""
+
+msgid "parking available"
+msgstr ""
+
+msgid "cell signal available"
+msgstr ""
+
+msgid "viewing spot"
+msgstr ""
+
+msgid "viewing spots"
+msgstr ""
+
+msgid "spot"
+msgstr ""
+
+msgid "rating"
+msgstr ""
+
+msgid "review"
+msgstr ""
+
+msgid "reviews"
+msgstr ""
+
+msgid "Viewing spot added."
+msgstr ""
+
+msgid "Changes saved."
+msgstr ""
+
+#, python-format
+msgid "Spot “%(title)s” deleted."
+msgstr ""
+
+msgid "You can’t review your own spot."
+msgstr ""
+
+msgid "You’ve already left a review — you can edit it."
+msgstr ""
+
+msgid "Thanks for your review!"
+msgstr ""
+
+msgid "Review updated."
+msgstr ""
+
+msgid "Review deleted."
+msgstr ""
+
+msgid "Access denied"
+msgstr ""
+
+msgid "Only the author can edit or delete this entry."
+msgstr ""
+
+msgid "Back to home"
+msgstr ""
+
+msgid "Not found"
+msgstr ""
+
+msgid "This page has gone into orbit"
+msgstr ""
+
+msgid "The page doesn’t exist or has been deleted."
+msgstr ""
+
+#, python-format
+msgid "Member since %(date)s"
+msgstr ""
+
+msgid "point"
+msgid_plural "points"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "scored prediction"
+msgid_plural "scored predictions"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "accuracy"
+msgstr ""
+
+#, python-format
+msgid "Spots (%(count)s)"
+msgstr ""
+
+msgid "None yet."
+msgstr ""
+
+#, python-format
+msgid "Reviews (%(count)s)"
+msgstr ""
+
+#, python-format
+msgid "Predictions (%(count)s)"
+msgstr ""
+
+msgid "awaiting flight"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Flights"
+msgstr ""
+
+msgid "Leaders"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgctxt "button"
+msgid "Log in"
+msgstr ""
+
+msgctxt "page title"
+msgid "Sign up"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Fan project, not affiliated with SpaceX"
+msgstr ""
+
+msgid "Deletion"
+msgstr ""
+
+msgid "Delete?"
+msgstr ""
+
+#, python-format
+msgid "You are about to delete “%(object)s”. This action cannot be undone."
+msgstr ""
+
+msgid "Yes, delete"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Where to watch the next Starship launch?"
+msgstr ""
+
+msgid ""
+"A community of launch watchers: share viewing spots, write reviews and "
+"compete in test flight predictions."
+msgstr ""
+
+msgid "Browse spots"
+msgstr ""
+
+msgid "Make a prediction"
+msgstr ""
+
+msgid "Join"
+msgstr ""
+
+#, python-format
+msgid "<strong class=\"text-body\">%(counter)s</strong> spot"
+msgid_plural "<strong class=\"text-body\">%(counter)s</strong> spots"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "<strong class=\"text-body\">%(counter)s</strong> review"
+msgid_plural "<strong class=\"text-body\">%(counter)s</strong> reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "<strong class=\"text-body\">%(counter)s</strong> prediction"
+msgid_plural "<strong class=\"text-body\">%(counter)s</strong> predictions"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Next flight"
+msgstr ""
+
+msgid "Flight predictions"
+msgstr ""
+
+msgid "No upcoming flights yet."
+msgstr ""
+
+msgid "Top viewing spots"
+msgstr ""
+
+msgid "No reviews yet."
+msgstr ""
+
+msgid "Top Starbase predictors"
+msgstr ""
+
+msgid "Full table →"
+msgstr ""
+
+#, python-format
+msgid "planned launch %(launch)s UTC"
+msgstr ""
+
+msgid "yes,no"
+msgstr ""
+
+msgid "Booster caught by tower"
+msgstr ""
+
+msgid "Ship splashed down"
+msgstr ""
+
+msgid "Actual launch"
+msgstr ""
+
+msgid "Your prediction"
+msgstr ""
+
+msgid "Booster caught:"
+msgstr ""
+
+msgid "Ship splashes down:"
+msgstr ""
+
+msgid "Launch:"
+msgstr ""
+
+msgid "Points:"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(login_url)s?next=%(next)s\">Log in</a> to make a prediction."
+msgstr ""
+
+msgid "Predictions are closed."
+msgstr ""
+
+#, python-format
+msgid "Community predictions (%(total)s)"
+msgstr ""
+
+#, python-format
+msgid "Believe the booster will be caught: %(percent)s%%"
+msgstr ""
+
+#, python-format
+msgid "Believe the ship will splash down: %(percent)s%%"
+msgstr ""
+
+msgid "Spectator"
+msgstr ""
+
+msgid "Booster"
+msgstr ""
+
+msgid "Ship"
+msgstr ""
+
+msgid "Launch, UTC"
+msgstr ""
+
+msgid "Points"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "No one has made a prediction yet."
+msgstr ""
+
+#, python-format
+msgid ""
+"Points: +1 for guessing the booster’s fate, +1 for the ship, +1 if the "
+"launch time is within %(minutes)s minute."
+msgid_plural ""
+"Points: +1 for guessing the booster’s fate, +1 for the ship, +1 if the "
+"launch time is within %(minutes)s minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Starship flights"
+msgstr ""
+
+msgid "Upcoming"
+msgstr ""
+
+#, python-format
+msgid "Predictions: %(count)s"
+msgstr ""
+
+msgid "No planned flights."
+msgstr ""
+
+msgid "Past"
+msgstr ""
+
+msgid "yes,no,—"
+msgstr ""
+
+msgid "Flight"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Booster caught"
+msgstr ""
+
+msgid "Predictions"
+msgstr ""
+
+msgid "Nothing here yet."
+msgstr ""
+
+msgid "Accuracy"
+msgstr ""
+
+msgid "No scored predictions yet."
+msgstr ""
+
+msgid "Only flights with known results are counted. Up to 3 points per flight."
+msgstr ""
+
+#, python-format
+msgid "Prediction for %(name)s"
+msgstr ""
+
+#, python-format
+msgid "Edit prediction for <a href=\"%(url)s\">%(name)s</a>"
+msgstr ""
+
+#, python-format
+msgid "Prediction for <a href=\"%(url)s\">%(name)s</a>"
+msgstr ""
+
+#, python-format
+msgid ""
+"Planned launch %(launch)s UTC. You can change your prediction until launch."
+msgstr ""
+
+msgid "Save prediction"
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+#, python-format
+msgid "%(number)s of %(total)s"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "No account?"
+msgstr ""
+
+msgid "Sign up"
+msgstr ""
+
+msgid "Create account"
+msgstr ""
+
+msgid "Already have an account?"
+msgstr ""
+
+msgctxt "call to action"
+msgid "Log in"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Edit review"
+msgstr ""
+
+msgid "New review"
+msgstr ""
+
+#, python-format
+msgid "of the spot <a href=\"%(url)s\">%(title)s</a>"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "added by"
+msgstr ""
+
+msgctxt "availability"
+msgid "yes,no"
+msgstr ""
+
+msgid "Visibility"
+msgstr ""
+
+msgid "Crowd"
+msgstr ""
+
+msgid "Parking"
+msgstr ""
+
+msgid "Cell signal"
+msgstr ""
+
+msgid "Distance to launch pad"
+msgstr ""
+
+#, python-format
+msgid "%(distance)s km"
+msgstr ""
+
+msgid "Coordinates"
+msgstr ""
+
+msgid "Reviews"
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(login_url)s?next=%(next)s\">Log in</a> to leave a review."
+msgstr ""
+
+msgid "This is your spot — reviews are left by other spectators."
+msgstr ""
+
+msgid "Leave a review"
+msgstr ""
+
+msgid "edited"
+msgstr ""
+
+msgid "Edit spot"
+msgstr ""
+
+msgid "New spot"
+msgstr ""
+
+#, python-format
+msgid "Editing: %(title)s"
+msgstr ""
+
+msgid "New viewing spot"
+msgstr ""
+
+msgid "+ Add spot"
+msgstr ""
+
+msgid "Search by title and description"
+msgstr ""
+
+msgid "All launch sites"
+msgstr ""
+
+msgid "Newest first"
+msgstr ""
+
+msgid "By rating"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "No reviews"
+msgstr ""
+
+#, python-format
+msgid "visibility %(visibility)s/5"
+msgstr ""
+
+msgid "Nothing found."
+msgstr ""

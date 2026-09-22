@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from .models import Flight, Prediction
 
@@ -11,9 +12,12 @@ class FlightAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {"fields": ("name", "site", "launch_date", "description", "status")}),
         (
-            "Итоги полёта",
+            _("Flight results"),
             {
-                "description": "Заполните после полёта и переведите статус в «Состоялся» — очки начислятся автоматически.",
+                "description": _(
+                    "Fill in after the flight and set the status to “Completed” — "
+                    "points will be awarded automatically."
+                ),
                 "fields": ("booster_caught", "ship_splashdown", "actual_launch_time"),
             },
         ),

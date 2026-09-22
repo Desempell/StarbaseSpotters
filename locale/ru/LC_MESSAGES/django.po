@@ -1,0 +1,710 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Starbase Spotters\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 22:19+0300\n"
+"PO-Revision-Date: 2026-09-22 22:17+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Optional."
+msgstr "Необязательно."
+
+#, python-format
+msgid "Welcome aboard, %(username)s!"
+msgstr "Добро пожаловать на борт, %(username)s!"
+
+msgid "Russian"
+msgstr "Русский"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "General"
+msgstr "Общее"
+
+msgid "Starbase, Texas"
+msgstr "Starbase, Техас"
+
+msgid "Kennedy Space Center, Florida"
+msgstr "Космический центр Кеннеди, Флорида"
+
+#, python-format
+msgid "Demo data is ready. Users: %(users)s; password: %(password)s"
+msgstr "Демо-данные готовы. Пользователи: %(users)s; пароль: %(password)s"
+
+msgid "Flight results"
+msgstr "Итоги полёта"
+
+msgid ""
+"Fill in after the flight and set the status to “Completed” — points will be "
+"awarded automatically."
+msgstr ""
+"Заполните после полёта и переведите статус в «Состоялся» — очки начислятся "
+"автоматически."
+
+msgid "Flights and predictions"
+msgstr "Полёты и прогнозы"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Will the tower catch the booster?"
+msgstr "Бустер поймают башней?"
+
+msgid "Will the ship splash down successfully?"
+msgstr "Корабль успешно приводнится?"
+
+msgid "Counts if you are off by no more than 30 minutes."
+msgstr "Засчитывается, если ошибка не больше 30 минут."
+
+msgid "Planned"
+msgstr "Запланирован"
+
+msgid "Completed"
+msgstr "Состоялся"
+
+msgid "Scrubbed"
+msgstr "Отменён"
+
+msgid "name"
+msgstr "название"
+
+msgid "launch site"
+msgstr "космодром"
+
+msgid "planned launch time (UTC)"
+msgstr "плановое время старта (UTC)"
+
+msgid "description"
+msgstr "описание"
+
+msgid "status"
+msgstr "статус"
+
+msgid "booster caught by tower"
+msgstr "бустер пойман башней"
+
+msgid "ship splashed down"
+msgstr "корабль приводнился"
+
+msgid "actual launch time (UTC)"
+msgstr "фактическое время старта (UTC)"
+
+msgid "flight"
+msgstr "полёт"
+
+msgid "flights"
+msgstr "полёты"
+
+msgid ""
+"For a completed flight, fill in all results: booster, ship and actual launch "
+"time."
+msgstr ""
+"Для состоявшегося полёта заполните все результаты: бустер, корабль и "
+"фактическое время старта."
+
+msgid "author"
+msgstr "автор"
+
+msgid "will the tower catch the booster?"
+msgstr "бустер поймают башней?"
+
+msgid "will the ship splash down successfully?"
+msgstr "корабль успешно приводнится?"
+
+msgid "when will it actually launch (UTC)?"
+msgstr "во сколько реально стартуют (UTC)?"
+
+msgid "comment"
+msgstr "комментарий"
+
+msgid "created"
+msgstr "создано"
+
+msgid "updated"
+msgstr "изменено"
+
+msgid "prediction"
+msgstr "прогноз"
+
+msgid "predictions"
+msgstr "прогнозы"
+
+msgid "Predictions for this flight are closed."
+msgstr "Приём прогнозов на этот полёт закрыт."
+
+msgid "You’ve already made a prediction — you can change it."
+msgstr "Вы уже сделали прогноз — его можно изменить."
+
+msgid "Prediction accepted. Good luck!"
+msgstr "Прогноз принят. Удачи!"
+
+msgid "Prediction updated."
+msgstr "Прогноз обновлён."
+
+msgid "Prediction deleted."
+msgstr "Прогноз удалён."
+
+msgid "Viewing spots"
+msgstr "Точки наблюдения"
+
+msgid "Optional. If you add coordinates, the spot will appear on the map."
+msgstr "Необязательно. Если указать координаты, точка появится на карте."
+
+msgid "How well can you see the launch? Where to park? When to arrive?"
+msgstr "Как видно запуск? Где парковаться? Когда приезжать?"
+
+msgid "Almost empty"
+msgstr "Почти никого"
+
+msgid "Moderate"
+msgstr "Умеренно"
+
+msgid "Crowded"
+msgstr "Толпа"
+
+msgid "title"
+msgstr "название"
+
+msgid "latitude"
+msgstr "широта"
+
+msgid "longitude"
+msgstr "долгота"
+
+msgid "distance to launch pad, km"
+msgstr "до стартового стола, км"
+
+msgid "visibility (1–5)"
+msgstr "обзор (1–5)"
+
+msgid "crowd"
+msgstr "людей"
+
+msgid "parking available"
+msgstr "есть парковка"
+
+msgid "cell signal available"
+msgstr "есть мобильная связь"
+
+msgid "viewing spot"
+msgstr "точка наблюдения"
+
+msgid "viewing spots"
+msgstr "точки наблюдения"
+
+msgid "spot"
+msgstr "точка"
+
+msgid "rating"
+msgstr "оценка"
+
+msgid "review"
+msgstr "отзыв"
+
+msgid "reviews"
+msgstr "отзывы"
+
+msgid "Viewing spot added."
+msgstr "Точка наблюдения добавлена."
+
+msgid "Changes saved."
+msgstr "Изменения сохранены."
+
+#, python-format
+msgid "Spot “%(title)s” deleted."
+msgstr "Точка «%(title)s» удалена."
+
+msgid "You can’t review your own spot."
+msgstr "Нельзя оценивать собственную точку."
+
+msgid "You’ve already left a review — you can edit it."
+msgstr "Вы уже оставили отзыв — его можно отредактировать."
+
+msgid "Thanks for your review!"
+msgstr "Спасибо за отзыв!"
+
+msgid "Review updated."
+msgstr "Отзыв обновлён."
+
+msgid "Review deleted."
+msgstr "Отзыв удалён."
+
+msgid "Access denied"
+msgstr "Нет доступа"
+
+msgid "Only the author can edit or delete this entry."
+msgstr "Изменять и удалять запись может только её автор."
+
+msgid "Back to home"
+msgstr "На главную"
+
+msgid "Not found"
+msgstr "Не найдено"
+
+msgid "This page has gone into orbit"
+msgstr "Страница улетела на орбиту"
+
+msgid "The page doesn’t exist or has been deleted."
+msgstr "Такой страницы нет или её удалили."
+
+#, python-format
+msgid "Member since %(date)s"
+msgstr "С нами с %(date)s"
+
+msgid "point"
+msgid_plural "points"
+msgstr[0] "очко"
+msgstr[1] "очка"
+msgstr[2] "очков"
+msgstr[3] "очка"
+
+msgid "scored prediction"
+msgid_plural "scored predictions"
+msgstr[0] "засчитанный прогноз"
+msgstr[1] "засчитанных прогноза"
+msgstr[2] "засчитанных прогнозов"
+msgstr[3] "засчитанного прогноза"
+
+msgid "accuracy"
+msgstr "точность"
+
+#, python-format
+msgid "Spots (%(count)s)"
+msgstr "Точки (%(count)s)"
+
+msgid "None yet."
+msgstr "Пока нет."
+
+#, python-format
+msgid "Reviews (%(count)s)"
+msgstr "Отзывы (%(count)s)"
+
+#, python-format
+msgid "Predictions (%(count)s)"
+msgstr "Прогнозы (%(count)s)"
+
+msgid "awaiting flight"
+msgstr "ждём полёта"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Flights"
+msgstr "Полёты"
+
+msgid "Leaders"
+msgstr "Лидеры"
+
+msgid "Log out"
+msgstr "Выйти"
+
+msgctxt "button"
+msgid "Log in"
+msgstr "Войти"
+
+msgctxt "page title"
+msgid "Sign up"
+msgstr "Регистрация"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Fan project, not affiliated with SpaceX"
+msgstr "Фан-проект, не связан со SpaceX"
+
+msgid "Deletion"
+msgstr "Удаление"
+
+msgid "Delete?"
+msgstr "Удалить?"
+
+#, python-format
+msgid "You are about to delete “%(object)s”. This action cannot be undone."
+msgstr "Вы собираетесь удалить «%(object)s». Это действие нельзя отменить."
+
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Where to watch the next Starship launch?"
+msgstr "Где смотреть следующий запуск Starship?"
+
+msgid ""
+"A community of launch watchers: share viewing spots, write reviews and "
+"compete in test flight predictions."
+msgstr ""
+"Сообщество зрителей: делитесь точками наблюдения, пишите отзывы и "
+"соревнуйтесь в прогнозах на тестовые полёты."
+
+msgid "Browse spots"
+msgstr "Смотреть точки"
+
+msgid "Make a prediction"
+msgstr "Сделать прогноз"
+
+msgid "Join"
+msgstr "Присоединиться"
+
+#, python-format
+msgid "<strong class=\"text-body\">%(counter)s</strong> spot"
+msgid_plural "<strong class=\"text-body\">%(counter)s</strong> spots"
+msgstr[0] "<strong class=\"text-body\">%(counter)s</strong> точка"
+msgstr[1] "<strong class=\"text-body\">%(counter)s</strong> точки"
+msgstr[2] "<strong class=\"text-body\">%(counter)s</strong> точек"
+msgstr[3] "<strong class=\"text-body\">%(counter)s</strong> точки"
+
+#, python-format
+msgid "<strong class=\"text-body\">%(counter)s</strong> review"
+msgid_plural "<strong class=\"text-body\">%(counter)s</strong> reviews"
+msgstr[0] "<strong class=\"text-body\">%(counter)s</strong> отзыв"
+msgstr[1] "<strong class=\"text-body\">%(counter)s</strong> отзыва"
+msgstr[2] "<strong class=\"text-body\">%(counter)s</strong> отзывов"
+msgstr[3] "<strong class=\"text-body\">%(counter)s</strong> отзыва"
+
+#, python-format
+msgid "<strong class=\"text-body\">%(counter)s</strong> prediction"
+msgid_plural "<strong class=\"text-body\">%(counter)s</strong> predictions"
+msgstr[0] "<strong class=\"text-body\">%(counter)s</strong> прогноз"
+msgstr[1] "<strong class=\"text-body\">%(counter)s</strong> прогноза"
+msgstr[2] "<strong class=\"text-body\">%(counter)s</strong> прогнозов"
+msgstr[3] "<strong class=\"text-body\">%(counter)s</strong> прогноза"
+
+msgid "Next flight"
+msgstr "Ближайший полёт"
+
+msgid "Flight predictions"
+msgstr "Прогнозы на полёт"
+
+msgid "No upcoming flights yet."
+msgstr "Ближайших полётов пока нет."
+
+msgid "Top viewing spots"
+msgstr "Лучшие точки наблюдения"
+
+msgid "No reviews yet."
+msgstr "Отзывов пока нет."
+
+msgid "Top Starbase predictors"
+msgstr "Лучшие предсказатели Starbase"
+
+msgid "Full table →"
+msgstr "Вся таблица →"
+
+#, python-format
+msgid "planned launch %(launch)s UTC"
+msgstr "плановый старт %(launch)s UTC"
+
+msgid "yes,no"
+msgstr "да,нет"
+
+msgid "Booster caught by tower"
+msgstr "Бустер пойман башней"
+
+msgid "Ship splashed down"
+msgstr "Корабль приводнился"
+
+msgid "Actual launch"
+msgstr "Фактический старт"
+
+msgid "Your prediction"
+msgstr "Ваш прогноз"
+
+msgid "Booster caught:"
+msgstr "Бустер поймают:"
+
+msgid "Ship splashes down:"
+msgstr "Корабль приводнится:"
+
+msgid "Launch:"
+msgstr "Старт:"
+
+msgid "Points:"
+msgstr "Очки:"
+
+msgid "Edit"
+msgstr "Изменить"
+
+msgid "Delete"
+msgstr "Удалить"
+
+#, python-format
+msgid ""
+"<a href=\"%(login_url)s?next=%(next)s\">Log in</a> to make a prediction."
+msgstr ""
+"<a href=\"%(login_url)s?next=%(next)s\">Войдите</a>, чтобы сделать прогноз."
+
+msgid "Predictions are closed."
+msgstr "Приём прогнозов закрыт."
+
+#, python-format
+msgid "Community predictions (%(total)s)"
+msgstr "Прогнозы сообщества (%(total)s)"
+
+#, python-format
+msgid "Believe the booster will be caught: %(percent)s%%"
+msgstr "Верят в поимку бустера: %(percent)s%%"
+
+#, python-format
+msgid "Believe the ship will splash down: %(percent)s%%"
+msgstr "Верят в приводнение корабля: %(percent)s%%"
+
+msgid "Spectator"
+msgstr "Зритель"
+
+msgid "Booster"
+msgstr "Бустер"
+
+msgid "Ship"
+msgstr "Корабль"
+
+msgid "Launch, UTC"
+msgstr "Старт, UTC"
+
+msgid "Points"
+msgstr "Очки"
+
+msgid "Comment"
+msgstr "Комментарий"
+
+msgid "No one has made a prediction yet."
+msgstr "Пока никто не сделал прогноз."
+
+#, python-format
+msgid ""
+"Points: +1 for guessing the booster’s fate, +1 for the ship, +1 if the "
+"launch time is within %(minutes)s minute."
+msgid_plural ""
+"Points: +1 for guessing the booster’s fate, +1 for the ship, +1 if the "
+"launch time is within %(minutes)s minutes."
+msgstr[0] ""
+"Очки: +1 за угаданную судьбу бустера, +1 за корабль, +1 если время старта "
+"угадано с точностью до %(minutes)s минуты."
+msgstr[1] ""
+"Очки: +1 за угаданную судьбу бустера, +1 за корабль, +1 если время старта "
+"угадано с точностью до %(minutes)s минут."
+msgstr[2] ""
+"Очки: +1 за угаданную судьбу бустера, +1 за корабль, +1 если время старта "
+"угадано с точностью до %(minutes)s минут."
+msgstr[3] ""
+"Очки: +1 за угаданную судьбу бустера, +1 за корабль, +1 если время старта "
+"угадано с точностью до %(minutes)s минуты."
+
+msgid "Starship flights"
+msgstr "Полёты Starship"
+
+msgid "Upcoming"
+msgstr "Предстоящие"
+
+#, python-format
+msgid "Predictions: %(count)s"
+msgstr "Прогнозов: %(count)s"
+
+msgid "No planned flights."
+msgstr "Запланированных полётов нет."
+
+msgid "Past"
+msgstr "Прошедшие"
+
+msgid "yes,no,—"
+msgstr "да,нет,—"
+
+msgid "Flight"
+msgstr "Полёт"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Booster caught"
+msgstr "Бустер пойман"
+
+msgid "Predictions"
+msgstr "Прогнозов"
+
+msgid "Nothing here yet."
+msgstr "Пока пусто."
+
+msgid "Accuracy"
+msgstr "Точность"
+
+msgid "No scored predictions yet."
+msgstr "Пока нет засчитанных прогнозов."
+
+msgid "Only flights with known results are counted. Up to 3 points per flight."
+msgstr ""
+"Учитываются только полёты, итоги которых уже известны. Максимум 3 очка за "
+"полёт."
+
+#, python-format
+msgid "Prediction for %(name)s"
+msgstr "Прогноз на %(name)s"
+
+#, python-format
+msgid "Edit prediction for <a href=\"%(url)s\">%(name)s</a>"
+msgstr "Изменить прогноз на <a href=\"%(url)s\">%(name)s</a>"
+
+#, python-format
+msgid "Prediction for <a href=\"%(url)s\">%(name)s</a>"
+msgstr "Прогноз на <a href=\"%(url)s\">%(name)s</a>"
+
+#, python-format
+msgid ""
+"Planned launch %(launch)s UTC. You can change your prediction until launch."
+msgstr "Плановый старт %(launch)s UTC. Прогноз можно менять до старта."
+
+msgid "Save prediction"
+msgstr "Сохранить прогноз"
+
+msgid "Pages"
+msgstr "Страницы"
+
+#, python-format
+msgid "%(number)s of %(total)s"
+msgstr "%(number)s из %(total)s"
+
+msgid "Log in"
+msgstr "Вход"
+
+msgid "No account?"
+msgstr "Нет аккаунта?"
+
+msgid "Sign up"
+msgstr "Зарегистрируйтесь"
+
+msgid "Create account"
+msgstr "Создать аккаунт"
+
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"
+
+msgctxt "call to action"
+msgid "Log in"
+msgstr "Войдите"
+
+msgid "Review"
+msgstr "Отзыв"
+
+msgid "Edit review"
+msgstr "Редактирование отзыва"
+
+msgid "New review"
+msgstr "Новый отзыв"
+
+#, python-format
+msgid "of the spot <a href=\"%(url)s\">%(title)s</a>"
+msgstr "о точке <a href=\"%(url)s\">%(title)s</a>"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "added by"
+msgstr "добавил(а)"
+
+msgctxt "availability"
+msgid "yes,no"
+msgstr "есть,нет"
+
+msgid "Visibility"
+msgstr "Обзор"
+
+msgid "Crowd"
+msgstr "Людей"
+
+msgid "Parking"
+msgstr "Парковка"
+
+msgid "Cell signal"
+msgstr "Мобильная связь"
+
+msgid "Distance to launch pad"
+msgstr "До стартового стола"
+
+#, python-format
+msgid "%(distance)s km"
+msgstr "%(distance)s км"
+
+msgid "Coordinates"
+msgstr "Координаты"
+
+msgid "Reviews"
+msgstr "Отзывы"
+
+#, python-format
+msgid "<a href=\"%(login_url)s?next=%(next)s\">Log in</a> to leave a review."
+msgstr ""
+"<a href=\"%(login_url)s?next=%(next)s\">Войдите</a>, чтобы оставить отзыв."
+
+msgid "This is your spot — reviews are left by other spectators."
+msgstr "Это ваша точка — отзывы оставляют другие зрители."
+
+msgid "Leave a review"
+msgstr "Оставить отзыв"
+
+msgid "edited"
+msgstr "изменён"
+
+msgid "Edit spot"
+msgstr "Редактирование точки"
+
+msgid "New spot"
+msgstr "Новая точка"
+
+#, python-format
+msgid "Editing: %(title)s"
+msgstr "Редактирование: %(title)s"
+
+msgid "New viewing spot"
+msgstr "Новая точка наблюдения"
+
+msgid "+ Add spot"
+msgstr "+ Добавить точку"
+
+msgid "Search by title and description"
+msgstr "Поиск по названию и описанию"
+
+msgid "All launch sites"
+msgstr "Все космодромы"
+
+msgid "Newest first"
+msgstr "Сначала новые"
+
+msgid "By rating"
+msgstr "По рейтингу"
+
+msgid "Search"
+msgstr "Найти"
+
+msgid "No reviews"
+msgstr "Нет отзывов"
+
+#, python-format
+msgid "visibility %(visibility)s/5"
+msgstr "обзор %(visibility)s/5"
+
+msgid "Nothing found."
+msgstr "Ничего не найдено."

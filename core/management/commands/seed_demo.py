@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils import timezone
+from django.utils.translation import gettext
 
 from core.choices import LaunchSite
 from flights.models import Flight, Prediction
@@ -93,7 +94,7 @@ DEMO_REVIEWS = [
 
 
 class Command(BaseCommand):
-    help = "Создаёт демо-пользователей, точки наблюдения, отзывы, полёты и прогнозы."
+    help = "Creates demo users, viewing spots, reviews, flights and predictions."
 
     @transaction.atomic
     def handle(self, *args, **options):
@@ -159,7 +160,8 @@ class Command(BaseCommand):
 
         self.stdout.write(
             self.style.SUCCESS(
-                f"Демо-данные готовы. Пользователи: {', '.join(DEMO_USERS)}; пароль: {DEMO_PASSWORD}"
+                gettext("Demo data is ready. Users: %(users)s; password: %(password)s")
+                % {"users": ", ".join(DEMO_USERS), "password": DEMO_PASSWORD}
             )
         )
 

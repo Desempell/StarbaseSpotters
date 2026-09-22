@@ -5,14 +5,17 @@ document.querySelectorAll("[data-t0]").forEach((el) => {
   const tick = () => {
     const diff = t0 - Date.now();
     if (diff <= 0) {
-      el.textContent = "T-0 наступил 🚀";
+      el.textContent = gettext("T-0 has arrived 🚀");
       return;
     }
     const days = Math.floor(diff / 86400000);
     const hours = Math.floor(diff / 3600000) % 24;
     const minutes = Math.floor(diff / 60000) % 60;
     const seconds = Math.floor(diff / 1000) % 60;
-    el.textContent = `T-${days}д ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    el.textContent = interpolate(gettext("T-%(days)sd %(time)s"), {
+      days: days,
+      time: `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`,
+    }, true);
     setTimeout(tick, 1000);
   };
 

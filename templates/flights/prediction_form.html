@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Прогноз на {{ flight.name }} — Starbase Spotters{% endblock %}
+{% load i18n %}
+{% block title %}{% blocktranslate with name=flight.name %}Prediction for {{ name }}{% endblocktranslate %} — Starbase Spotters{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-lg-7">
-    <h1 class="h3 mb-1">{% if object %}Изменить прогноз{% else %}Прогноз{% endif %} на <a href="{{ flight.get_absolute_url }}">{{ flight.name }}</a></h1>
+    {% with url=flight.get_absolute_url name=flight.name %}
+      <h1 class="h3 mb-1">{% if object %}{% blocktranslate %}Edit prediction for <a href="{{ url }}">{{ name }}</a>{% endblocktranslate %}{% else %}{% blocktranslate %}Prediction for <a href="{{ url }}">{{ name }}</a>{% endblocktranslate %}{% endif %}</h1>
+    {% endwith %}
     <p class="text-body-secondary mb-3">
-      Плановый старт {{ flight.launch_date|date:"d.m.Y H:i" }} UTC. Прогноз можно менять до старта.
+      {% blocktranslate with launch=flight.launch_date|date:"SHORT_DATETIME_FORMAT" %}Planned launch {{ launch }} UTC. You can change your prediction until launch.{% endblocktranslate %}
     </p>
     <form method="post">
       {% include "includes/form.html" %}
       <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-primary">Сохранить прогноз</button>
-        <a class="btn btn-outline-secondary" href="{{ flight.get_absolute_url }}">Отмена</a>
+        <button type="submit" class="btn btn-primary">{% translate "Save prediction" %}</button>
+        <a class="btn btn-outline-secondary" href="{{ flight.get_absolute_url }}">{% translate "Cancel" %}</a>
       </div>
     </form>
   </div>

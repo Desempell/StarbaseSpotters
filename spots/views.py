@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg, Count, F, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from core.choices import LaunchSite
@@ -82,7 +83,7 @@ class SpotCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        messages.success(self.request, "Точка наблюдения добавлена.")
+        messages.success(self.request, _("Viewing spot added."))
         return super().form_valid(form)
 
 
@@ -92,7 +93,7 @@ class SpotUpdateView(AuthorRequiredMixin, UpdateView):
     template_name = "spots/spot_form.html"
 
     def form_valid(self, form):
-        messages.success(self.request, "Изменения сохранены.")
+        messages.success(self.request, _("Changes saved."))
         return super().form_valid(form)
 
 
@@ -102,7 +103,7 @@ class SpotDeleteView(AuthorRequiredMixin, DeleteView):
     success_url = reverse_lazy("spots:list")
 
     def form_valid(self, form):
-        messages.success(self.request, f"Точка «{self.object}» удалена.")
+        messages.success(self.request, _("Spot “%(title)s” deleted.") % {"title": self.object})
         return super().form_valid(form)
 
 
@@ -115,10 +116,10 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         self.spot = get_object_or_404(Spot, pk=kwargs["pk"])
         if request.user.is_authenticated:
             if self.spot.author_id == request.user.id:
-                messages.error(request, "Нельзя оценивать собственную точку.")
+                messages.error(request, _("You can’t review your own spot."))
                 return redirect(self.spot)
             if self.spot.reviews.filter(author=request.user).exists():
-                messages.info(request, "Вы уже оставили отзыв — его можно отредактировать.")
+                messages.info(request, _("You’ve already left a review — you can edit it."))
                 return redirect(self.spot)
         return super().dispatch(request, *args, **kwargs)
 
@@ -130,7 +131,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.spot = self.spot
         form.instance.author = self.request.user
-        messages.success(self.request, "Спасибо за отзыв!")
+        messages.success(self.request, _("Thanks for your review!"))
         return super().form_valid(form)
 
 
@@ -145,7 +146,7 @@ class ReviewUpdateView(AuthorRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
-        messages.success(self.request, "Отзыв обновлён.")
+        messages.success(self.request, _("Review updated."))
         return super().form_valid(form)
 
 
@@ -157,5 +158,5 @@ class ReviewDeleteView(AuthorRequiredMixin, DeleteView):
         return self.object.spot.get_absolute_url()
 
     def form_valid(self, form):
-        messages.success(self.request, "Отзыв удалён.")
+        messages.success(self.request, _("Review deleted."))
         return super().form_valid(form)

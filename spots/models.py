@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from core.choices import LaunchSite
 
@@ -13,17 +14,17 @@ RATING_VALIDATORS = [MinValueValidator(1), MaxValueValidator(5)]
 class Spot(models.Model):
 
     class Crowd(models.TextChoices):
-        LOW = "low", "Почти никого"
-        MEDIUM = "medium", "Умеренно"
-        HIGH = "high", "Толпа"
+        LOW = "low", _("Almost empty")
+        MEDIUM = "medium", _("Moderate")
+        HIGH = "high", _("Crowded")
 
-    title = models.CharField("название", max_length=120)
+    title = models.CharField(_("title"), max_length=120)
     site = models.CharField(
-        "космодром", max_length=20, choices=LaunchSite.choices, default=LaunchSite.STARBASE
+        _("launch site"), max_length=20, choices=LaunchSite.choices, default=LaunchSite.STARBASE
     )
-    description = models.TextField("описание", blank=True)
+    description = models.TextField(_("description"), blank=True)
     latitude = models.DecimalField(
-        "широта",
+        _("latitude"),
         max_digits=9,
         decimal_places=6,
         null=True,
@@ -31,7 +32,7 @@ class Spot(models.Model):
         validators=[MinValueValidator(-90), MaxValueValidator(90)],
     )
     longitude = models.DecimalField(
-        "долгота",
+        _("longitude"),
         max_digits=9,
         decimal_places=6,
         null=True,
@@ -39,7 +40,7 @@ class Spot(models.Model):
         validators=[MinValueValidator(-180), MaxValueValidator(180)],
     )
     distance_km = models.DecimalField(
-        "до стартового стола, км",
+        _("distance to launch pad, km"),
         max_digits=5,
         decimal_places=1,
         null=True,
@@ -47,21 +48,21 @@ class Spot(models.Model):
         validators=[MinValueValidator(0)],
     )
     visibility = models.PositiveSmallIntegerField(
-        "обзор (1–5)", validators=RATING_VALIDATORS, default=3
+        _("visibility (1–5)"), validators=RATING_VALIDATORS, default=3
     )
-    crowd = models.CharField("людей", max_length=10, choices=Crowd.choices, default=Crowd.MEDIUM)
-    has_parking = models.BooleanField("есть парковка", default=False)
-    has_cell_signal = models.BooleanField("есть мобильная связь", default=False)
+    crowd = models.CharField(_("crowd"), max_length=10, choices=Crowd.choices, default=Crowd.MEDIUM)
+    has_parking = models.BooleanField(_("parking available"), default=False)
+    has_cell_signal = models.BooleanField(_("cell signal available"), default=False)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="spots", verbose_name="автор"
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="spots", verbose_name=_("author")
     )
-    created_at = models.DateTimeField("создано", auto_now_add=True)
-    updated_at = models.DateTimeField("изменено", auto_now=True)
+    created_at = models.DateTimeField(_("created"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated"), auto_now=True)
 
     class Meta:
         ordering = ["-created_at"]
-        verbose_name = "точка наблюдения"
-        verbose_name_plural = "точки наблюдения"
+        verbose_name = _("viewing spot")
+        verbose_name_plural = _("viewing spots")
         constraints = [
             models.CheckConstraint(
                 condition=models.Q(visibility__gte=1, visibility__lte=5),
@@ -83,20 +84,20 @@ class Spot(models.Model):
 class Review(models.Model):
 
     spot = models.ForeignKey(
-        Spot, on_delete=models.CASCADE, related_name="reviews", verbose_name="точка"
+        Spot, on_delete=models.CASCADE, related_name="reviews", verbose_name=_("spot")
     )
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reviews", verbose_name="автор"
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="reviews", verbose_name=_("author")
     )
-    rating = models.PositiveSmallIntegerField("оценка", validators=RATING_VALIDATORS)
-    text = models.TextField("отзыв", max_length=2000)
-    created_at = models.DateTimeField("создано", auto_now_add=True)
-    updated_at = models.DateTimeField("изменено", auto_now=True)
+    rating = models.PositiveSmallIntegerField(_("rating"), validators=RATING_VALIDATORS)
+    text = models.TextField(_("review"), max_length=2000)
+    created_at = models.DateTimeField(_("created"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated"), auto_now=True)
 
     class Meta:
         ordering = ["-created_at"]
-        verbose_name = "отзыв"
-        verbose_name_plural = "отзывы"
+        verbose_name = _("review")
+        verbose_name_plural = _("reviews")
         constraints = [
             models.UniqueConstraint(fields=["spot", "author"], name="one_review_per_user_per_spot"),
             models.CheckConstraint(

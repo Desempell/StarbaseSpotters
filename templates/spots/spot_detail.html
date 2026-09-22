@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% load static spotters %}
+{% load static i18n spotters %}
 {% block title %}{{ spot.title }} — Starbase Spotters{% endblock %}
 {% block head %}<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">{% endblock %}
 {% block content %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'spots:list' %}">Точки наблюдения</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'spots:list' %}">{% translate "Viewing spots" %}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ spot.title }}</li>
   </ol>
 </nav>
@@ -14,15 +14,15 @@
   <div>
     <h1 class="h2 mb-1">{{ spot.title }}</h1>
     <div class="text-body-secondary">
-      {{ spot.get_site_display }} · добавил(а)
+      {{ spot.get_site_display }} · {% translate "added by" %}
       <a href="{% url 'profile' spot.author.username %}">{{ spot.author.username }}</a>
-      · {{ spot.created_at|date:"d.m.Y" }}
+      · {{ spot.created_at|date:"SHORT_DATE_FORMAT" }}
     </div>
   </div>
   {% if user == spot.author %}
     <div class="d-flex gap-2">
-      <a class="btn btn-outline-light btn-sm" href="{% url 'spots:update' spot.pk %}">Изменить</a>
-      <a class="btn btn-outline-danger btn-sm" href="{% url 'spots:delete' spot.pk %}">Удалить</a>
+      <a class="btn btn-outline-light btn-sm" href="{% url 'spots:update' spot.pk %}">{% translate "Edit" %}</a>
+      <a class="btn btn-outline-danger btn-sm" href="{% url 'spots:delete' spot.pk %}">{% translate "Delete" %}</a>
     </div>
   {% endif %}
 </div>
@@ -30,16 +30,17 @@
 <div class="row g-4">
   <div class="col-lg-7">
     {% if spot.description %}<p class="fs-5">{{ spot.description|linebreaksbr }}</p>{% endif %}
+    {% translate "yes,no" context "availability" as available %}
     <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between"><span>Обзор</span><span class="stars">{{ spot.visibility|stars }}</span></li>
-      <li class="list-group-item d-flex justify-content-between"><span>Людей</span><span>{{ spot.get_crowd_display }}</span></li>
-      <li class="list-group-item d-flex justify-content-between"><span>Парковка</span><span>{{ spot.has_parking|yesno:"есть,нет" }}</span></li>
-      <li class="list-group-item d-flex justify-content-between"><span>Мобильная связь</span><span>{{ spot.has_cell_signal|yesno:"есть,нет" }}</span></li>
+      <li class="list-group-item d-flex justify-content-between"><span>{% translate "Visibility" %}</span><span class="stars">{{ spot.visibility|stars }}</span></li>
+      <li class="list-group-item d-flex justify-content-between"><span>{% translate "Crowd" %}</span><span>{{ spot.get_crowd_display }}</span></li>
+      <li class="list-group-item d-flex justify-content-between"><span>{% translate "Parking" %}</span><span>{{ spot.has_parking|yesno:available }}</span></li>
+      <li class="list-group-item d-flex justify-content-between"><span>{% translate "Cell signal" %}</span><span>{{ spot.has_cell_signal|yesno:available }}</span></li>
       {% if spot.distance_km is not None %}
-        <li class="list-group-item d-flex justify-content-between"><span>До стартового стола</span><span>{{ spot.distance_km }} км</span></li>
+        <li class="list-group-item d-flex justify-content-between"><span>{% translate "Distance to launch pad" %}</span><span>{% blocktranslate with distance=spot.distance_km %}{{ distance }} km{% endblocktranslate %}</span></li>
       {% endif %}
       {% if spot.has_coordinates %}
-        <li class="list-group-item d-flex justify-content-between"><span>Координаты</span><span>{{ spot.latitude }}, {{ spot.longitude }}</span></li>
+        <li class="list-group-item d-flex justify-content-between"><span>{% translate "Coordinates" %}</span><span>{{ spot.latitude }}, {{ spot.longitude }}</span></li>
       {% endif %}
     </ul>
   </div>
@@ -52,7 +53,7 @@
 </div>
 
 <h2 class="h4 mt-5">
-  Отзывы
+  {% translate "Reviews" %}
   {% if spot.review_count %}
     <span class="stars">{{ spot.avg_rating|stars }}</span>
     <small class="text-body-secondary fs-6">{{ spot.avg_rating|floatformat:1 }} · {{ spot.review_count }}</small>
@@ -60,15 +61,16 @@
 </h2>
 
 {% if not user.is_authenticated %}
-  <p class="text-body-secondary"><a href="{% url 'login' %}?next={{ request.path|urlencode }}">Войдите</a>, чтобы оставить отзыв.</p>
+  {% url 'login' as login_url %}
+  <p class="text-body-secondary">{% blocktranslate with next=request.path|urlencode %}<a href="{{ login_url }}?next={{ next }}">Log in</a> to leave a review.{% endblocktranslate %}</p>
 {% elif user == spot.author %}
-  <p class="text-body-secondary">Это ваша точка — отзывы оставляют другие зрители.</p>
+  <p class="text-body-secondary">{% translate "This is your spot — reviews are left by other spectators." %}</p>
 {% elif not user_review %}
   <div class="card mb-3">
     <div class="card-body">
       <form method="post" action="{% url 'spots:review_create' spot.pk %}">
         {% include "includes/form.html" with form=review_form %}
-        <button type="submit" class="btn btn-primary">Оставить отзыв</button>
+        <button type="submit" class="btn btn-primary">{% translate "Leave a review" %}</button>
       </form>
     </div>
   </div>
@@ -83,20 +85,20 @@
           <span class="stars ms-2">{{ review.rating|stars }}</span>
         </div>
         <small class="text-body-secondary">
-          {{ review.created_at|date:"d.m.Y H:i" }}{% if review.was_edited %} · изменён{% endif %}
+          {{ review.created_at|date:"SHORT_DATETIME_FORMAT" }}{% if review.was_edited %} · {% translate "edited" %}{% endif %}
         </small>
       </div>
       <p class="mb-0 mt-2">{{ review.text|linebreaksbr }}</p>
       {% if user == review.author %}
         <div class="mt-2 small">
-          <a href="{% url 'spots:review_update' review.pk %}">Изменить</a> ·
-          <a class="link-danger" href="{% url 'spots:review_delete' review.pk %}">Удалить</a>
+          <a href="{% url 'spots:review_update' review.pk %}">{% translate "Edit" %}</a> ·
+          <a class="link-danger" href="{% url 'spots:review_delete' review.pk %}">{% translate "Delete" %}</a>
         </div>
       {% endif %}
     </div>
   </div>
 {% empty %}
-  <p class="text-body-secondary">Отзывов пока нет.</p>
+  <p class="text-body-secondary">{% translate "No reviews yet." %}</p>
 {% endfor %}
 {% endblock %}
 {% block scripts %}

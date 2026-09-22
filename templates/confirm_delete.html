@@ -1,16 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Удаление — Starbase Spotters{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "Deletion" %} — Starbase Spotters{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-md-7 col-lg-5">
     <div class="card border-danger">
       <div class="card-body">
-        <h1 class="h4">Удалить?</h1>
-        <p>Вы собираетесь удалить «{{ object }}». Это действие нельзя отменить.</p>
+        <h1 class="h4">{% translate "Delete?" %}</h1>
+        <p>{% blocktranslate %}You are about to delete “{{ object }}”. This action cannot be undone.{% endblocktranslate %}</p>
         <form method="post" class="d-flex gap-2">
           {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Да, удалить</button>
-          <a class="btn btn-outline-secondary" href="{{ object.get_absolute_url }}">Отмена</a>
+          <button type="submit" class="btn btn-danger">{% translate "Yes, delete" %}</button>
+          <a class="btn btn-outline-secondary" href="{{ object.get_absolute_url }}">{% translate "Cancel" %}</a>
         </form>
       </div>
     </div>

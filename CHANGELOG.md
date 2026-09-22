@@ -7,6 +7,13 @@
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-09-22
+
+### Added
+
+- Локализация интерфейса на русский и английский языки (Django i18n, gettext),
+  включая JavaScript; переключатель языка в шапке сайта.
+
 ## [1.0.0] - 2026-09-15
 
 ### Added
@@ -25,5 +32,6 @@
 - Тесты на pytest, CI на GitHub Actions.
 - Документация: README, архитектура, руководство пользователя, правила разработки.
 
-[Unreleased]: https://github.com/OWNER/starbase-spotters/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/OWNER/starbase-spotters/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/OWNER/starbase-spotters/compare/v1.0.0...v1.0.2
 [1.0.0]: https://github.com/OWNER/starbase-spotters/releases/tag/v1.0.0
