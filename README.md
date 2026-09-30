@@ -89,9 +89,13 @@ pytest
 
 ## Документация
 
+- [Оглавление документации](docs/README.md)
 - [Архитектура и модель данных](docs/architecture.md)
 - [Руководство пользователя и администратора](docs/usage.md)
+- [Тесты](docs/testing.md)
+- [Развёртывание](docs/deployment.md)
 - [Правила разработки](docs/contributing.md)
+- [Идеи для развития](docs/roadmap.md)
 - [История изменений](CHANGELOG.md)
 
 ## Версионирование
